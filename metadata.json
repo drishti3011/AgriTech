@@ -1,0 +1,6 @@
+{
+  "name": "AgriTech - Empowering Farmers Through Digital Technology",
+  "description": "Smart farming management system with weather forecasting, soil analysis, pest alerts, resource ordering, mandi prices, and expert consultation in English, Hindi, Telugu, and Tamil.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

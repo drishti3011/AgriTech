@@ -1,0 +1,269 @@
+{
+  "info": {
+    "_postman_id": "b3e94a81-agritech-2026-collection",
+    "name": "AgriTech - REST API Collection",
+    "description": "Complete REST API collection for AgriTech Smart Farming Management System including Authentication, Farms, Crops, Soil Analysis, Weather, Marketplace, Orders, Consultations, Forum, Mandi Prices, and Admin Operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Farmer Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ramesh@farmer.in\",\n  \"password\": \"farmer123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@agritech.org\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Register Farmer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Suresh Kumar\",\n  \"email\": \"suresh@farmer.in\",\n  \"password\": \"farmer123\",\n  \"phone\": \"+91 98221 44556\",\n  \"role\": \"farmer\",\n  \"language\": \"hi\",\n  \"state\": \"Madhya Pradesh\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Farms",
+      "item": [
+        {
+          "name": "Get All Farms",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/farms", "host": ["{{baseUrl}}"], "path": ["farms"] }
+          }
+        },
+        {
+          "name": "Create Farm",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cauvery Delta Organic Field\",\n  \"area\": 7.0,\n  \"soilType\": \"Alluvial\",\n  \"irrigationType\": \"Canal\",\n  \"location\": {\n    \"district\": \"Thanjavur\",\n    \"state\": \"Tamil Nadu\"\n  },\n  \"surveyNumber\": \"Sy-204/C\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/farms", "host": ["{{baseUrl}}"], "path": ["farms"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crops",
+      "item": [
+        {
+          "name": "Get Crops",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/crops", "host": ["{{baseUrl}}"], "path": ["crops"] }
+          }
+        },
+        {
+          "name": "Create Crop Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"farmId\": \"frm-01\",\n  \"name\": \"Sorghum (ज्वार)\",\n  \"variety\": \"CSH-24\",\n  \"sowingDate\": \"2026-03-01\",\n  \"expectedHarvest\": \"2026-06-25\",\n  \"status\": \"Planned\",\n  \"yieldEstimated\": 18,\n  \"areaAllocated\": 3.5\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/crops", "host": ["{{baseUrl}}"], "path": ["crops"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Soil Health & Analysis",
+      "item": [
+        {
+          "name": "Get Soil Reports",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/soil-reports", "host": ["{{baseUrl}}"], "path": ["soil-reports"] }
+          }
+        },
+        {
+          "name": "Submit Soil Sample Test",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"farmId\": \"frm-01\",\n  \"pH\": 7.2,\n  \"nitrogen\": 240,\n  \"phosphorus\": 28,\n  \"potassium\": 260,\n  \"organicCarbon\": 0.72,\n  \"moisture\": 24\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/soil-reports", "host": ["{{baseUrl}}"], "path": ["soil-reports"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Weather & Pest Radar",
+      "item": [
+        {
+          "name": "Get Live Weather Forecast",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/weather?city=Hoshangabad", "host": ["{{baseUrl}}"], "path": ["weather"], "query": [{ "key": "city", "value": "Hoshangabad" }] }
+          }
+        },
+        {
+          "name": "Get Pest Outbreak Alerts",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/alerts", "host": ["{{baseUrl}}"], "path": ["alerts"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Agri Marketplace & Orders",
+      "item": [
+        {
+          "name": "List Store Resources",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/resources?category=all", "host": ["{{baseUrl}}"], "path": ["resources"] }
+          }
+        },
+        {
+          "name": "Place Order (Kisan Pay)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"resource\": \"res-02\",\n      \"name\": \"Neem-Coated Urea 46% N\",\n      \"category\": \"fertilizers\",\n      \"price\": 266,\n      \"quantity\": 2,\n      \"unit\": \"45 kg bag\"\n    }\n  ],\n  \"shippingAddress\": {\n    \"fullName\": \"Ramesh Patel\",\n    \"phone\": \"+91 94231 88921\",\n    \"village\": \"Pipariya\",\n    \"district\": \"Hoshangabad\",\n    \"state\": \"Madhya Pradesh\",\n    \"pincode\": \"461775\"\n  },\n  \"paymentMethod\": \"Cash on Delivery (Kisan Pay)\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        },
+        {
+          "name": "Get Orders List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consultations & Forum",
+      "item": [
+        {
+          "name": "Book Expert Agronomist",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"farmerName\": \"Ramesh Patel\",\n  \"farmerPhone\": \"+91 94231 88921\",\n  \"expertName\": \"Dr. Anita Roy\",\n  \"cropAffected\": \"Wheat\",\n  \"symptomsDescription\": \"Spotted chlorosis on flag leaf margins\",\n  \"urgency\": \"normal\",\n  \"scheduledDate\": \"2026-03-05\",\n  \"scheduledTime\": \"11:00 AM\",\n  \"meetingType\": \"phone\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/consultations", "host": ["{{baseUrl}}"], "path": ["consultations"] }
+          }
+        },
+        {
+          "name": "Get Forum Discussions",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/forum", "host": ["{{baseUrl}}"], "path": ["forum"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Management",
+      "item": [
+        {
+          "name": "Get Admin KPIs & Statistics",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/stats", "host": ["{{baseUrl}}"], "path": ["admin", "stats"] }
+          }
+        },
+        {
+          "name": "Broadcast Emergency Advisory",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Locust Early Warning: Rajasthan Border\",\n  \"description\": \"Moderate activity spotted near Jaisalmer desert zone.\",\n  \"category\": \"pest\",\n  \"severity\": \"high\",\n  \"affectedCrops\": [\"Wheat\", \"Mustard\", \"Gram\"],\n  \"actionRequired\": \"Prepare tractor-mounted ULV sprayers with Chlorpyrifos 20 EC.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/admin/alerts", "host": ["{{baseUrl}}"], "path": ["admin", "alerts"] }
+          }
+        },
+        {
+          "name": "Reseed Database",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/admin/reseed", "host": ["{{baseUrl}}"], "path": ["admin", "reseed"] }
+          }
+        }
+      ]
+    }
+  ]
+}
